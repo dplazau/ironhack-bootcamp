@@ -13,7 +13,7 @@ In this lab we are going to practice with [`bash`](<https://en.wikipedia.org/wik
 2. Check the contents of the folder using the "ls" command
 
 ```shell
-$ ls
+ls
 ```
 
 and you should see the following:
@@ -39,12 +39,11 @@ exercises  inputs  lorem  lorem-copy  modules  outputs  README.md
 11. Print the last 3 rows in `sed.txt` file from `lorem-copy` folder. You should see `Homo homini lupus.`.
 12. `sed` command is used to replace the text in a file. Use the `sed` command to replace all occurances of `et` with `ET` in the file `at.txt` file present in the folder `lorem`. You can use the following link to refer to `sed` commands [https://www.linode.com/docs/guides/manipulate-text-from-the-command-line-with-sed/]
 Check the contents of the sed.txt file using `cat` command.
-13. Find who is the system user. 
+13. Find who is the system user.
 14. Find the current path of the directory you are in.
 15. List all files with the extension `.txt` in lorem folder.
 16. Count the rows in `sed.txt` file from lorem folder. Look concatenate `cat` and `wc` with the pipe `|`.
 17. Count the **files** which start with `lorem` in all directories.
-
 
 ## Bonus
 
