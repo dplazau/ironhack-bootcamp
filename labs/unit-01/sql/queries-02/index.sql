@@ -58,8 +58,8 @@ select
             film;
 
 -- 9.0 How many movies longer than 3 hours?
-select distinct
-    count(film.film_id)
+select
+    count(distinct film.film_id)
         from
             film 
                 where 

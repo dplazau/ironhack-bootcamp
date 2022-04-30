@@ -31,17 +31,15 @@ select -- 2nd --
 
 -- 5.1
 select
-    distinct
-        count(store.store_id) as qty_stores
-            from
-                store;
+    count(distinct store.store_id) as qty_stores
+        from
+            store;
 
 -- 5.2
 select
-    distinct
-        count(staff.store_id) as qty_staff
-            from
-                staff;
+    count(distinct staff.store_id) as qty_staff
+        from
+            staff;
 
 -- 5.3
 select
