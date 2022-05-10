@@ -1,34 +1,17 @@
 -- queries-06
 
--- 1.0 Add the new films to the database.
-select
-    *
-        from
-            film;
+use sakila;
 
-COPY 
-    film
-        (
-            film_id,
-            title,
-            description,
-            release_year,
-            language_id,
-            original_language_id,
-            rental_duration,
-            rental_rate,
-            length,
-            replacement_cost,
-            rating
-        )
-            FROM 'C:\Temp\films_2020.csv'
-                    DELIMITER ','
-                        CSV HEADER;
+show variables like 'local_infile';
+set global local_infile = 1;
+show variables like 'secure_file_priv';
+set sql_safe_updates = 1;
 
+load data infile 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/films_2020.csv'
+into table films_2020
+fields terminated by ',';
 
-update 
-    film
-    set 
-        rental_duration = 3, 
-        rental_rate = 2.99, 
-        replacement_cost = 8.99;
+select * from films_2020;
+
+update films_2020
+set rental_duration = 3, rental_rate = 2.99, replacement_cost = 8.99;
