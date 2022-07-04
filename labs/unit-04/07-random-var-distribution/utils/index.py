@@ -1,11 +1,21 @@
 from pydoc import doc
 from typing import final
+from xml.etree.ElementInclude import include
 # from .docs import *
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
+def log_transform(x):
+    return np.log(x + 1)
+
+def apply_log_transform(sets):
+    lst_log_transformed_sets = []
+    for set in sets:
+        set[set.select_dtypes(np.number).columns] = set[set.select_dtypes(np.number).columns].apply(log_transform)
+        lst_log_transformed_sets.append(set)
+    return lst_log_transformed_sets
 
 def split_text_on_uppercase(s, keep_contiguous=False):
     string_length = len(s)
@@ -37,6 +47,9 @@ def categorize_numeric(set):
         discrete_subset.append(col) if unique_values_per_column < 250 else continuous_subset.append(col)
     return set[discrete_subset], set[continuous_subset]
 
+def categorize_dataframe(set):
+    disc_subset, cont_subset = categorize_numeric(set.select_dtypes(np.number))
+    return disc_subset, cont_subset, set.select_dtypes(include=['object', 'datetime'])
 
 def split_data(df, target):
     df = df.dropna()
@@ -78,3 +91,34 @@ def encode_data(scaled_sets, encoder):
     except:
         raise
         
+
+def fit_model(X_train_scaled_and_encoded, y_train, model_list):
+    lst_fitted_models = []
+    try:
+        for model in model_list:
+            lst_fitted_models.append(model().fit(X_train_scaled_and_encoded, y_train))
+        return lst_fitted_models
+    except:
+        raise
+
+def predict_results(X_test_scaled_and_encoded, lst_fitted_models):
+    predictions_fitted_models = []
+    try:
+        for fitted_model in lst_fitted_models:
+            predictions_fitted_models.append(fitted_model.predict(X_test_scaled_and_encoded))
+        return predictions_fitted_models
+    except:
+        raise
+
+# for func in [categorize_numeric]:
+#     func.__doc__ = eval(f"DOCS_{func.__name__}")
+
+
+
+# X = [['Male', 1], ['Female', 3], ['Female', 2]]
+# Y = [['Male', 1], ['Female', 3], ['Female', 2]]
+# lst_sets = [X, Y]
+
+# X_e, Y_e = encode_data(lst_sets, OneHotEncoder)
+
+# print(X_e, Y_e)
