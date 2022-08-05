@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -x
+
+DEV_IMG=conda/miniconda3
+DEV_CONTAINER_NAME="data_dev_env"
+LOCAL_APP_PATH=/${PWD}
+CONTAINER_PATH=/home/
+CLIENT_ID=2679bf5a8a254a1ba3e88c53dc4073e5
+CLIENT_SECRET=b02c25e28b6e4d79aa121be689b21f66
+
