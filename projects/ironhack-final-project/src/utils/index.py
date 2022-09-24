@@ -88,3 +88,5 @@ def plot_distributions(data: pd.DataFrame, figsize: tuple):
             sns.displot(data[col])
         else:
             sns.countplot(data[col])
+
+def 
