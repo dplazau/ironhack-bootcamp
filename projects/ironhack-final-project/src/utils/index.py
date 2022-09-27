@@ -89,4 +89,12 @@ def plot_distributions(data: pd.DataFrame, figsize: tuple):
         else:
             sns.countplot(data[col])
 
-def 
+def unique_values_per_column(df):
+    unique_values={}
+    for col in df.columns:
+        unique_values[col] = df[col].value_counts().shape[0]
+    return pd.DataFrame(unique_values, index=['unique value count']).transpose()
+
+def duplicate_obs(df):
+    duplicates = df[df.duplicated()]
+    return duplicates, len(duplicates)
