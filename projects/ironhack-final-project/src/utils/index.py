@@ -98,3 +98,8 @@ def unique_values_per_column(df):
 def duplicate_obs(df):
     duplicates = df[df.duplicated()]
     return duplicates, len(duplicates)
+
+def apply_benchmark_model(X_train, X_test, y_train, model):
+    model = model()
+    model.fit(X_train, y_train)
+    return model.predict(X_test)
